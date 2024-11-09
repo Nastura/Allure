@@ -21,8 +21,8 @@ class DeliveryTest {
     void setup() {
         Configuration.headless = true;
         open("http://localhost:9999");
-//        $("[data-test-id='date' input]").sendKeys(Keys.CONTROL + "A");
-//        $("[data-test-id='date' input]").sendKeys("DELETE");
+//        $("[data-test-id='date' input]").sendKeys(Keys.chord(Keys.CONTROL + "A"));
+//        $("[data-test-id='date' input]").sendKeys(Keys.chord("DELETE"));
     }
 
     @Test
@@ -35,14 +35,16 @@ class DeliveryTest {
         var daysToAddForSecondMeeting = 7;
         var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
         $("[data-test-id='city'] input").setValue(validUser.getCity());
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(firstMeetingDate);
         $("[data-test-id='name'] input").setValue(validUser.getName());
         $("[data-test-id='phone'] input").setValue(validUser.getPhone());
         $("[data-test-id='agreement']").click();
         $(".button").click();
         $(".notification__title").shouldBe(visible, Duration.ofSeconds(5)).shouldBe(exactText("Успешно!"));
-        $(".button").click();
+        $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
+        $(".button").click();
         $("[data-test-id='replan-notification'] .notification__title").shouldBe(visible, Duration.ofSeconds(5)).shouldBe(exactText("Необходимо подтверждение"));
         $("[data-test-id='replan-notification'] .button").click();
     }

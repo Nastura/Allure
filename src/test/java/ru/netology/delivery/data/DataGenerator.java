@@ -18,32 +18,37 @@ public class DataGenerator {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate date = today.plusDays(shift);
-        // TODO: добавить логику для объявления переменной date и задания её значения, для генерации строки с датой
-        // Вы можете использовать класс LocalDate и его методы для получения и форматирования даты
         return date.format(formatter);
     }
 
     public static String generateCity(String locale) {
         Faker faker = new Faker(new Locale(locale));
         String city = faker.address().city();
-        // TODO: добавить логику для объявления переменной city и задания её значения, генерацию можно выполнить
-        // с помощью Faker, либо используя массив валидных городов и класс Random
-        return city;
+        String[] sityy = new String[]{
+                "Ярославль", "Якутск", "Южно-Сахалинск", "Элиста", "Чита", "Челябинск", "Чебоксары", "Херсон",
+                "Ханты-Мансийск", "Хабаровск", "Уфа", "Ульяновск", "Улан-Удэ", "Тюмень", "Тула", "Томск", "Тверь",
+                "Тамбов", "Сыктывкар", "Ставрополь", "Смоленск", "Симферополь", "Севастополь", "Саратов", "Саранск",
+                "Санкт-Петербург", "Самара", "Салехард", "Рязань", "Ростов-на-Дону", "Псков", "Петропавловск-Камчатский", "Петрозаводск",
+                "Пермь", "Пенза", "Оренбург", "Орёл", "Омск", "Новосибирск", "Нижний Новгород", "Нарьян-Мар", "Нальчик", "Мурманск", "Москва", "Москва",
+                "Мелитополь", "Махачкала", "Майкоп", "Магас", "Магадан", "Луганск", "Липецк", "Кызыл",
+                "Курск", "Курган", "Красноярск", "Краснодар", "Кострома", "Киров", "Кемерово", "Калуга",
+                "Калининград", "Казань", "Йошкар-Ола", "Иркутск", "Ижевск", "Иваново", "Екатеринбург", "Донецк",
+                "Грозный", "Воронеж", "Вологда", "Волгоград", "Владимир", "Владикавказ", "Владивосток", "Великий Новгород",
+                "Брянск", "Благовещенск", "Биробиджан", "Белгород"
+        };
+
+        return sityy[new Random().nextInt(sityy.length)];
     }
 
     public static String generateName(String locale) {
         Faker faker = new Faker(new Locale(locale));
-        String name = faker.name().fullName();
-        // TODO: добавить логику для объявления переменной name и задания её значения, для генерации можно
-        // использовать Faker
+        String name = faker.name().lastName() + " " + faker.name().firstName();
         return name;
     }
 
     public static String generatePhone(String locale) {
         Faker faker = new Faker(new Locale(locale));
         String phone = faker.phoneNumber().phoneNumber();
-        // TODO: добавить логику для объявления переменной phone и задания её значения, для генерации можно
-        // использовать Faker
         System.out.println(phone);
         return phone;
 
@@ -54,9 +59,6 @@ public class DataGenerator {
         }
 
         public static UserInfo generateUser(String locale) {
-            // TODO: добавить логику для создания пользователя user с использованием методов generateCity(locale),
-            // generateName(locale), generatePhone(locale)
-//            Faker faker = new Faker(new Locale("ru"));
             UserInfo user = new UserInfo(
                     generateCity(locale),
                     generateName(locale),
