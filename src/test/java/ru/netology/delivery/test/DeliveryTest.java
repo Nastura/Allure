@@ -20,7 +20,6 @@ class DeliveryTest {
 
     @BeforeEach
     void setup() {
-//        Configuration.headless = true;
         open("http://localhost:9999");
 //        $("[data-test-id='date' input]").sendKeys(Keys.chord(Keys.CONTROL + "A"));
 //        $("[data-test-id='date' input]").sendKeys(Keys.chord("DELETE"));
